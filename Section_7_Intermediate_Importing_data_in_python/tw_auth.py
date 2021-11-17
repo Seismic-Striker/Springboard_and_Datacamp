@@ -1,0 +1,4 @@
+import tweepy, json
+api_key='ck210zdun4DN17F0hyntt790j'
+api_key_secret='sf4rY9t6vYIRiz2qKyRt9OYxasKk7l3vIwMEjf712L75DOHjqw'
+bearer_token='AAAAAAAAAAAAAAAAAAAAAFZ6VwEAAAAACJjUsrsUiCtZKxj5HWJNFht7dKo%3Dje1svIVcc5AEP4L91HtWAR6FoaSQRYxlv6uCDggCVWRC2gJ5aY'
