@@ -109,11 +109,12 @@ the member name. */
 
 ~~~
 
-SELECT DISTINCT m.surname, f.name
+SELECT DISTINCT m.surname as Name, f.name as Court
 FROM Bookings AS b
 LEFT JOIN Members AS m ON b.memid = m.memid
 LEFT JOIN Facilities AS f ON b.facid = f.facid
 WHERE f.name LIKE '%tennis court%'
+AND m.memid != 0
 ORDER BY m.surname
 ~~~
 
@@ -125,9 +126,28 @@ the guest user's ID is always 0. Include in your output the name of the
 facility, the name of the member formatted as a single column, and the cost.
 Order by descending cost, and do not use any subqueries. */
 
+~~~
+SELECT f.name, m.surname,
+CASE WHEN b.memid != 0 THEN b.slots * f.membercost
+	ELSE b.slots * f.guestcost END As Cost
+FROM Bookings as b
+LEFT JOIN Members as m
+ON b.memid = m.memid
+LEFT JOIN Facilities as f
+ON b.facid = f.facid
+WHERE b.starttime like '2012-09-14%'
+HAVING Cost > 30
+ORDER BY Cost Desc
+~~~
+
 
 /* Q9: This time, produce the same result as in Q8, but using a subquery. */
 
+~~~~~
+
+UNKNOWN
+
+~~~~~
 
 /* PART 2: SQLite
 
@@ -139,11 +159,75 @@ QUESTIONS:
 The output of facility name and total revenue, sorted by revenue. Remember
 that there's a different cost for guests and members! */
 
+~~~
+SELECT f.name,
+CASE WHEN b.memid != 0 THEN SUM(b.slots * f.membercost)
+	ELSE SUM(b.slots * f.guestcost) END As Revenue
+FROM Bookings as b
+LEFT JOIN Members as m
+ON b.memid = m.memid
+LEFT JOIN Facilities as f
+ON b.facid = f.facid
+Group by f.facid
+HAVING Revenue < 1000
+~~~~
+
+
 /* Q11: Produce a report of members and who recommended them in alphabetic surname,firstname order */
+
+~~~
+SELECT m1.surname || ", " || m1.firstname as Member, m2.surname as 'recommended by'
+FROM Members as m1
+INNER JOIN Members as m2
+ON m1.recommendedby = m2.memid
+ORDER BY m1.surname
+
+OR 
+
+SELECT m1.surname,m1.firstname, 
+CASE WHEN m2.memid = 0 THEN 'No Referal'
+	ELSE m2.surname END as'recommended by'
+FROM Members as m1
+INNER JOIN Members as m2
+ON m1.recommendedby = m2.memid
+ORDER BY m1.surname
+~~~
 
 
 /* Q12: Find the facilities with their usage by member, but not guests */
 
+SELECT f.name,m.surname,COUNT(b.bookid) as bookings
+FROM Bookings as b
+LEFT JOIN Members as m
+ON b.memid = m.memid
+LEFT JOIN Facilities as f
+ON b.facid = f.facid
+group by m.surname,f.name
+HAVING m.memid != 0
+ORDER BY bookings DESC
 
+*******SO THIS IS WRONG BC ITS COUNTING THE TOTAL NUMBER OF BOOKINGS BY THE
+MEMBER, NOT THE ONES THAT CORRELATE TO THE FACILITY******
+('Pool Table', 'Rownam', 241)
 /* Q13: Find the facilities usage by month, but not guests */
+
+
+SELECT CASE WHEN b.starttime LIKE '2012-07%" THEN JULY
+WHEN b.starttime LIKE '2012-08%" THEN AUGUST
+WHEN b.starttime LIKE '2012-09%" THEN SEPTEMBER
+ELSE UKNOWN END as Month
+
+
+
+,f.name,COUNT(b.bookid) as bookings
+FROM Bookings as b
+LEFT JOIN Members as m
+ON b.memid = m.memid
+LEFT JOIN Facilities as f
+ON b.facid = f.facid
+group by Month
+HAVING m.memid != 0
+ORDER BY bookings DESC
+
+
 
