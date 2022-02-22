@@ -69,7 +69,7 @@ Try writing the query without using the OR operator. */
 ~~~
 SELECT *
 FROM Facilities
-WHERE name LIKE '%2%'
+WHERE facid IN (1,5)
 ~~~
 
 
@@ -145,7 +145,25 @@ ORDER BY Cost Desc
 
 ~~~~~
 
-UNKNOWN
+SELECT
+firstname || ' ' || surname AS member,
+name AS facility,
+cost
+FROM
+(SELECT
+firstname,
+surname,
+name,
+CASE WHEN firstname = 'GUEST' THEN guestcost * slots ELSE membercost * slots END AS cost,
+starttime
+FROM members
+INNER JOIN bookings
+ON members.memid = bookings.memid
+INNER JOIN facilities
+ON bookings.facid = facilities.facid) AS inner_table
+WHERE starttime >= '2012-09-14' AND starttime < '2012-09-15'
+AND cost > 30
+ORDER BY cost DESC;
 
 ~~~~~
 
@@ -176,11 +194,11 @@ HAVING Revenue < 1000
 /* Q11: Produce a report of members and who recommended them in alphabetic surname,firstname order */
 
 ~~~
-SELECT m1.surname || ", " || m1.firstname as Member, m2.surname as 'recommended by'
+SELECT m1.surname || ", " || m1.firstname as Member, m2.firstname|| " " || m2.surname as 'recommended by'
 FROM Members as m1
 INNER JOIN Members as m2
 ON m1.recommendedby = m2.memid
-ORDER BY m1.surname
+ORDER BY Member
 
 OR 
 
@@ -196,19 +214,17 @@ ORDER BY m1.surname
 
 /* Q12: Find the facilities with their usage by member, but not guests */
 
-SELECT f.name,m.surname,COUNT(b.bookid) as bookings
-FROM Bookings as b
-LEFT JOIN Members as m
-ON b.memid = m.memid
-LEFT JOIN Facilities as f
-ON b.facid = f.facid
-group by m.surname,f.name
-HAVING m.memid != 0
-ORDER BY bookings DESC
+~~~~
+SELECT f.name,m.firstname||' '||m.surname as Member,
+count(f.name) as bookings
+FROM Members m
+inner join Bookings bk on bk.memid = m.memid
+inner join Facilities f on f.facid = bk.facid
+where m.memid>0
+group by f.name,Member
+order by f.name,m.surname,m.firstname 
+~~~~
 
-*******SO THIS IS WRONG BC ITS COUNTING THE TOTAL NUMBER OF BOOKINGS BY THE
-MEMBER, NOT THE ONES THAT CORRELATE TO THE FACILITY******
-('Pool Table', 'Rownam', 241)
 /* Q13: Find the facilities usage by month, but not guests */
 
 
