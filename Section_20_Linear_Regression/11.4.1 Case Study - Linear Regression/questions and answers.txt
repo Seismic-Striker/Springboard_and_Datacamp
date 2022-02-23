@@ -1,0 +1,3 @@
+What can you infer about the nature of these variables, as output by the info() method?
+
+Which variables might be suitable for regression analysis, and why? For those variables that aren't suitable for regression analysis, is there another type of statistical modeling for which they are suitable?
