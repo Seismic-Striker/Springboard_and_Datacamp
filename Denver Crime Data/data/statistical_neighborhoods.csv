@@ -1,0 +1,79 @@
+NBHD_ID,NBHD_NAME,TYPOLOGY,NOTES
+2,Auraria,None,None
+21,Cory - Merrill,None,None
+7,Belcaro,None,None
+70,Washington Park,None,None
+71,Washington Park West,None,None
+59,Speer,None,None
+13,Cherry Creek,None,None
+22,Country Club,None,None
+20,Congress Park,None,None
+14,City Park,None,None
+44,Marston,None,None
+27,Fort Logan,None,None
+4,Barnum,None,None
+5,Barnum West,None,None
+74,West Colfax,NEST,None
+75,West Highland,None,None
+56,Sloan Lake,None,None
+8,Berkeley,None,None
+52,Regis,None,None
+11,Chaffee Park,None,None
+36,Highland,None,None
+1,Athmar Park,None,None
+73,Wellshire,None,None
+64,University,None,None
+53,Rosedale,None,None
+12,Cheesman Park,None,None
+37,Hilltop,None,None
+46,Montclair,None,None
+31,Hale,None,None
+48,North Park Hill,None,None
+57,South Park Hill,None,None
+66,University Park,None,None
+51,Platt Park,None,None
+50,Overland,None,None
+54,Ruby Hill,None,None
+40,Kennedy,None,None
+32,Hampden,None,None
+58,Southmoor Park,None,None
+33,Hampden South,None,None
+38,Indian Creek,None,None
+30,Goldsmith,None,None
+65,University Hills,None,None
+34,Harvey Park,None,None
+43,Mar Lee,None,None
+24,East Colfax,NEST,None
+9,Capitol Hill,None,None
+47,North Capitol Hill,None,None
+16,Civic Center,None,None
+10,CBD,None,None
+63,Union Station,None,None
+60,Central Park,None,"Formerly Stapleton, changed August 2020"
+45,Montbello,NEST,None
+42,Lowry Field,None,None
+28,Gateway - Green Valley Ranch,None,None
+35,Harvey Park South,None,None
+19,College View - South Platte,None,None
+15,City Park West,None,None
+61,Sun Valley,NEST,None
+67,Valverde,NEST,None
+68,Villa Park,NEST,None
+26,Five Points,None,None
+29,Globeville,NEST,None
+6,Bear Valley,None,None
+69,Virginia Village,None,Includes +/- 9.6 acre island per 2020 census tract
+78,Windsor,None,None
+72,Washington Virginia Vale,None,None
+39,Jefferson Park,None,None
+49,Northeast Park Hill,NEST,None
+25,Elyria Swansea,NEST,None
+3,Baker,None,None
+17,Clayton,None,None
+55,Skyland,None,None
+41,Lincoln Park,None,None
+77,Whittier,None,None
+18,Cole,None,None
+76,Westwood,NEST,None
+62,Sunnyside,None,None
+23,DIA,None,None
